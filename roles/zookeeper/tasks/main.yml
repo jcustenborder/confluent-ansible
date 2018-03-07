@@ -39,7 +39,7 @@
     src: zookeeper.properties.j2
     dest: "{{zookeeper.config_file}}"
   notify:
-    - reload zookeeper
+    - restart zookeeper
 - name: zookeeper configure service
   systemd:
     name: "{{zookeeper.service_name}}"
