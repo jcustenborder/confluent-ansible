@@ -37,6 +37,9 @@
   template:
     src: broker.service.j2
     dest: "{{kafka.broker.systemd_file}}"
+    mode: 0600
+    owner: root
+    group: root
   notify:
     - reload systemd
     - restart kafka

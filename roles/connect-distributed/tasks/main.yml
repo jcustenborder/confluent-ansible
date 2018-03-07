@@ -11,6 +11,9 @@
   template:
     src: connect-distributed.service.j2
     dest: "{{kafka.connect.distributed.systemd_file}}"
+    mode: 0600
+    owner: root
+    group: root
   notify:
     - reload systemd
     - restart connect distributed
@@ -18,6 +21,9 @@
   template:
     src: connect-distributed.properties.j2
     dest: "{{kafka.connect.distributed.config_file}}"
+    mode: 0640
+    owner: "{{kafka.connect.user}}"
+    group: "{{kafka.connect.group}}"
   notify:
     - restart connect distributed
 - name: connect distributed configure service
