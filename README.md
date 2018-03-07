@@ -44,6 +44,14 @@ control-center:
 
 ## Running
 
+### Check for Changes
+
+```bash
+ansible-playbook --check -i hosts.yml all.yaml
+```
+
+### Apply Changes
+
 ```bash
 ansible-playbook -i hosts.yml all.yaml
 ```
