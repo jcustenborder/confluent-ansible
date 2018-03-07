@@ -1,0 +1,4 @@
+- name: restart control center
+  systemd:
+    name: control-center
+    state: restarted
