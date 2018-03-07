@@ -20,7 +20,6 @@
   template:
     src: schema-registry.service.j2
     dest: "{{schema.registry.systemd_file}}"
-    state: directory
     mode: 0600
     owner: root
     group: root
