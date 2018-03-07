@@ -4,5 +4,19 @@
   tasks:
   - import_role:
       name: zookeeper
-#  - include_role:
-#      name: common
+- hosts: broker
+  tasks:
+  - import_role:
+      name: kafka-broker
+- hosts: schema-registry
+  tasks:
+  - import_role:
+      name: schema-registry
+- hosts: connect-distributed
+  tasks:
+  - import_role:
+      name: connect-distributed
+- hosts: control-center
+  tasks:
+  - import_role:
+      name: control-center

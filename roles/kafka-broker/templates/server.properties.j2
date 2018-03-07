@@ -1,0 +1,7 @@
+# Maintained by Ansible
+broker.id={{kafka.broker.id}}
+zookeeper.connect={% for host in groups['zookeeper'] %}{% if loop.index > 1%},{% endif %}{{ host }}:{{zookeeper.config.clientPort}}{% endfor %}
+
+{% for key, value in kafka.broker.config.iteritems() %}
+{{key}}={{value}}
+{% endfor %}

@@ -1,0 +1,42 @@
+- import_role:
+    name: common
+- name: broker group
+  group:
+    name: "{{kafka.broker.group}}"
+- name: broker user
+  user:
+    name: "{{kafka.broker.user}}"
+    comment: "Kafka User"
+    system: yes
+    group: "{{kafka.broker.group}}"
+- name: broker log dir
+  file:
+    path: "{{kafka.broker.environment.LOG_DIR}}"
+    state: directory
+    mode: 0755
+    owner: "{{kafka.broker.user}}"
+    group: "{{kafka.broker.group}}"
+- name: broker data dir
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items: "{{kafka.broker.datadir}}"
+- name: broker config
+  template:
+    src: server.properties.j2
+    dest: "{{kafka.broker.config_file}}"
+  notify:
+    - restart kafka
+- name: broker create systemd unit
+  template:
+    src: broker.service.j2
+    dest: "{{kafka.broker.systemd_file}}"
+  notify:
+    - reload systemd
+    - restart kafka
+- name: broker configure service
+  systemd:
+    name: "{{kafka.broker.service_name}}"
+    enabled: "{{kafka.broker.systemd.enabled}}"
+    state: "{{kafka.broker.systemd.state}}"

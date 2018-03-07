@@ -33,7 +33,7 @@
     dest: "{{zookeeper.systemd_file}}"
   notify:
     - reload systemd
-    - reload zookeeper
+    - restart zookeeper
 - name: zookeeper create config
   template:
     src: zookeeper.properties.j2
