@@ -1,6 +1,10 @@
 kafka:
   connect:
     standalone:
+      config_file: /etc/kafka/connect-standalone.properties
+      logging_config_file: /etc/kafka/connect-standalone.logging.properties
+      systemd_file: /usr/lib/systemd/system/confluent-connect-standalone.service
+      service_name: confluent-connect-standalone
       data_dir: /var/lib/connect-standalone
       plugin_path:
         - /usr/share/java
