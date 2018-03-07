@@ -27,6 +27,11 @@
   template:
     src: myid.j2
     dest: "{{zookeeper.config.dataDir}}/myid"
+    mode: 0555
+    owner: "{{zookeeper.user}}"
+    group: "{{zookeeper.group}}"
+  notify:
+    - restart zookeeper
 - name: zookeeper create systemd unit
   template:
     src: zookeeper.service.j2
