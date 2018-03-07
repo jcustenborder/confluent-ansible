@@ -1,0 +1,6 @@
+# Maintained by Ansible
+kafkastore.connection.url={% for host in groups['zookeeper'] %}{% if loop.index > 1%},{% endif %}{{ host }}:{{zookeeper.config.clientPort}}{% endfor %}
+
+{% for key, value in schema.registry.config.iteritems() %}
+{{key}}={{value}}
+{% endfor %}

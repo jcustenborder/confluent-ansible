@@ -79,8 +79,23 @@ schema:
   registry:
     user: schema-registry
     group: schema-registry
-    heap: -Xmx1000M
-    logdir: /var/log/schema-registry
+    config_file: /etc/kafka/schema-registry.properties
+    logging_config_file: /etc/kafka/schema-registry.logging.properties
+    systemd_file: /usr/lib/systemd/system/schema-registry.service
+    service_name: schema-registry
+    config:
+      listeners: http://0.0.0.0:8081
+      kafkastore.topic: _schemas
+      debug: false
+    environment:
+      SCHEMA_REGISTRY_HEAP_OPTS: "-Xmx1000M"
+      LOG_DIR: /var/log/schema-registry
+    systemd:
+      enabled: yes
+      state: started
+      LimitNOFILE: 128000
+      TimeoutStopSec: 300
+      RestartSec: 5
 confluent:
   package_name: confluent-platform-2.11
   repository:
