@@ -1,0 +1,75 @@
+kakfa:
+  rest:
+    user: kafka-rest
+    group: kafka-rest
+    heap: -Xmx1000M
+    logdir: /var/log/kafka-rest
+  broker:
+    user: kafka
+    group: kafka
+    heap: -Xmx1000M
+    datadir:
+      - /var/lib/kafka
+    logdir: /var/log/kafka
+  connect:
+    distributed:
+      user: connect-distributed
+      group: connect-distributed
+      heap: -Xmx1000M
+    standalone:
+      user: connect-standalone
+      group: connect-standalone
+      heap: -Xmx1000M
+zookeeper:
+  user: zookeeper
+  group: zookeeper
+  heap: -Xmx1000M
+  config_file: /etc/kafka/zookeeper.properties
+  logging_config_file: /etc/kafka/zookeeper.logging.properties
+  systemd_file: /usr/lib/systemd/system/zookeeper.service
+  service_name: zookeeper
+  config:
+    clientPort: 2181
+    maxClientCnxns: 0
+    initLimit: 5
+    syncLimit: 2
+    autopurge.snapRetainCount: 10
+    autopurge.purgeInterval: 1
+    dataDir: /var/lib/zookeeper
+  environment:
+    KAFKA_HEAP_OPTS: "-Xmx1000M"
+    LOG_DIR: /var/log/zookeeper
+  systemd:
+    enabled: yes
+    state: started
+    LimitNOFILE: 128000
+    TimeoutStopSec: 300
+    RestartSec: 5
+schema:
+  registry:
+    user: schema-registry
+    group: schema-registry
+    heap: -Xmx1000M
+    logdir: /var/log/schema-registry
+confluent:
+  package_name: confluent-platform-2.11
+  repository:
+    debian:
+    redhat:
+      main:
+        baseurl: https://packages.confluent.io/rpm/4.0
+        gpgcheck: 1
+        gpgkey: https://packages.confluent.io/rpm/4.0/archive.key
+        enabled: 1
+      dist:
+        baseurl: https://packages.confluent.io/rpm/4.0/7
+        gpgcheck: 1
+        gpgkey:  https://packages.confluent.io/rpm/4.0/archive.key
+        enabled: 1
+  control:
+    center:
+      user: control-center
+      group: control-center
+      heap: -Xmx1000M
+      datadir: /var/lib/control-center
+      logdir: /var/log/control-center
