@@ -1,4 +1,4 @@
 - name: restart zookeeper
   systemd:
-    name: zookeeper
+    name: "{{zookeeper.service_name}}"
     state: restarted
