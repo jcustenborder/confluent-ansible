@@ -4,6 +4,6 @@ zookeeper.connect={% for host in groups['zookeeper'] %}{% if loop.index > 1%},{%
 bootstrap.servers={% for host in groups['broker'] %}{% if loop.index > 1%},{% endif %}{{ host }}:9092{% endfor %}
 
 confluent.controlcenter.data.dir={{confluent.control.center.data_dir}}
-{% for key, value in confluent.control.center.config.iteritems() %}
+{% for key, value in confluent.control.center.config.items() %}
 {{key}}={{value}}
 {% endfor %}

@@ -14,7 +14,7 @@ TimeoutStopSec = {{ confluent.control.center.systemd.TimeoutStopSec}}
 Type           = simple
 LimitNOFILE    = {{ confluent.control.center.systemd.LimitNOFILE}}
 
-{% for key, value in confluent.control.center.environment.iteritems() %}
+{% for key, value in confluent.control.center.environment.items() %}
 Environment="{{key}}={{value}}"
 {% endfor %}
 

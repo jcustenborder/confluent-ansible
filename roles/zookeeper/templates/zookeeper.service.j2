@@ -14,7 +14,7 @@ TimeoutStopSec = {{ zookeeper.systemd.TimeoutStopSec}}
 Type           = simple
 LimitNOFILE    = {{ zookeeper.systemd.LimitNOFILE}}
 
-{% for key, value in zookeeper.environment.iteritems() %}
+{% for key, value in zookeeper.environment.items() %}
 Environment="{{key}}={{value}}"
 {% endfor %}
 

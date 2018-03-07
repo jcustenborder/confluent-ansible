@@ -14,7 +14,7 @@ TimeoutStopSec = {{ schema.registry.systemd.TimeoutStopSec}}
 Type           = simple
 LimitNOFILE    = {{ schema.registry.systemd.LimitNOFILE}}
 
-{% for key, value in schema.registry.environment.iteritems() %}
+{% for key, value in schema.registry.environment.items() %}
 Environment="{{key}}={{value}}"
 {% endfor %}
 

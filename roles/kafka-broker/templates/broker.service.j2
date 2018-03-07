@@ -14,7 +14,7 @@ TimeoutStopSec = {{ kafka.broker.systemd.TimeoutStopSec}}
 Type           = simple
 LimitNOFILE    = {{ kafka.broker.systemd.LimitNOFILE}}
 
-{% for key, value in kafka.broker.environment.iteritems() %}
+{% for key, value in kafka.broker.environment.items() %}
 Environment="{{key}}={{value}}"
 {% endfor %}
 
