@@ -1,0 +1,34 @@
+- import_role:
+    name: connect
+- name: connect standalone create log dir
+  file:
+    path: "{{kafka.connect.standalone.environment.LOG_DIR}}"
+    state: directory
+    mode: 0755
+    owner: "{{kafka.connect.user}}"
+    group: "{{kafka.connect.group}}"
+- name: connect standalone create log dir
+  file:
+    path: "{{kafka.connect.standalone.environment.LOG_DIR}}"
+    state: directory
+    mode: 0755
+    owner: "{{kafka.connect.user}}"
+    group: "{{kafka.connect.group}}"
+- name: connect standalone create systemd unit
+  template:
+    src: connect-standalone.service.j2
+    dest: "{{kafka.connect.standalone.systemd_file}}"
+  notify:
+    - reload systemd
+    - restart connect standalone
+- name: connect standalone create config
+  template:
+    src: connect-standalone.properties.j2
+    dest: "{{kafka.connect.standalone.config_file}}"
+  notify:
+    - restart connect standalone
+- name: connect standalone configure service
+  systemd:
+    name: "{{kafka.connect.standalone.service_name}}"
+    enabled: "{{kafka.connect.standalone.systemd.enabled}}"
+    state: "{{kafka.connect.standalone.systemd.state}}"    

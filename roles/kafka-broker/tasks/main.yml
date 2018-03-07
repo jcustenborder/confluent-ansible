@@ -13,19 +13,24 @@
   file:
     path: "{{kafka.broker.environment.LOG_DIR}}"
     state: directory
-    mode: 0755
+    mode: 0750
     owner: "{{kafka.broker.user}}"
     group: "{{kafka.broker.group}}"
 - name: broker data dir
   file:
     path: "{{ item }}"
     state: directory
-    mode: 0755
+    mode: 0750
+    owner: "{{kafka.broker.user}}"
+    group: "{{kafka.broker.group}}"
   with_items: "{{kafka.broker.datadir}}"
 - name: broker config
   template:
     src: server.properties.j2
     dest: "{{kafka.broker.config_file}}"
+    mode: 0640
+    owner: "{{kafka.broker.user}}"
+    group: "{{kafka.broker.group}}"
   notify:
     - restart kafka
 - name: broker create systemd unit
