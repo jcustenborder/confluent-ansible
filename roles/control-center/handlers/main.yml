@@ -1,4 +1,4 @@
 - name: restart control center
   systemd:
-    name: control-center
+    name: "{{confluent.control.center.service_name}}"
     state: restarted
