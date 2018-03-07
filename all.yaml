@@ -1,5 +1,3 @@
----
-
 - hosts: zookeeper
   tasks:
   - import_role:
@@ -16,6 +14,10 @@
   tasks:
   - import_role:
       name: connect-distributed
+- hosts: connect-standalone
+  tasks:
+  - import_role:
+      name: connect-standalone
 - hosts: control-center
   tasks:
   - import_role:
