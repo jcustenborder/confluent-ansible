@@ -1,5 +1,3 @@
-- import_role:
-    name: common
 - name: zookeeper create group
   group:
     name: "{{zookeeper.group}}"

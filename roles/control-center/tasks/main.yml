@@ -1,5 +1,3 @@
-- import_role:
-    name: common
 - name: control center create group
   group:
     name: "{{confluent.control.center.group}}"

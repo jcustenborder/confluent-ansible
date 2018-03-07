@@ -55,3 +55,14 @@ ansible-playbook --check -i hosts.yml all.yaml
 ```bash
 ansible-playbook -i hosts.yml all.yaml
 ```
+
+```yaml
+# service, user
+#confluent-schema-registry, cp-schema-registry
+#confluent-kafka-rest, cp-kafka-rest
+#confluent-control-center, cp-control-center
+#confluent-kafka-connect, cp-kafka-connect
+#confluent-kafka, cp-kafka
+#confluent-zookeeper, cp-kafka   <-- Take note!
+#confluent-ksql, cp-ksql
+```

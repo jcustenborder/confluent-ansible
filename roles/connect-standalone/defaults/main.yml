@@ -1,0 +1,19 @@
+kafka:
+  connect:
+    standalone:
+      data_dir: /var/lib/connect-standalone
+      plugin_path:
+        - /usr/share/java
+      environment:
+        KAFKA_HEAP_OPTS: "-Xmx1000M"
+        LOG_DIR: /var/log/connect-standalone
+      config:
+        consumer.interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
+        producer.interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
+        internal.key.converter: org.apache.kafka.connect.json.JsonConverter
+        internal.key.converter.schemas.enable: false
+        internal.value.converter: org.apache.kafka.connect.json.JsonConverter
+        internal.value.converter.schemas.enable: false
+        offset.flush.interval.ms: 10000
+        key.converter: io.confluent.connect.avro.AvroConverter
+        value.converter: io.confluent.connect.avro.AvroConverter

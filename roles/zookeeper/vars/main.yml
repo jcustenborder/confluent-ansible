@@ -1,0 +1,23 @@
+zookeeper:
+  user: cp-kafka
+  group: cp-kafka
+  config_file: /etc/kafka/zookeeper.properties
+  logging_config_file: /etc/kafka/zookeeper.logging.properties
+  systemd_file: /usr/lib/systemd/system/confluent-zookeeper.service
+  service_name: confluent-zookeeper
+  config:
+    maxClientCnxns: 0
+    initLimit: 5
+    syncLimit: 2
+    autopurge.snapRetainCount: 10
+    autopurge.purgeInterval: 1
+    dataDir: /var/lib/zookeeper
+  environment:
+    KAFKA_HEAP_OPTS: "-Xmx1000M"
+    LOG_DIR: /var/log/zookeeper
+  systemd:
+    enabled: yes
+    state: started
+    LimitNOFILE: 128000
+    TimeoutStopSec: 300
+    RestartSec: 5

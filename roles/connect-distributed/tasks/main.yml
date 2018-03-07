@@ -1,5 +1,3 @@
-- import_role:
-    name: connect
 - name: connect distributed create log dir
   file:
     path: "{{kafka.connect.distributed.environment.LOG_DIR}}"
