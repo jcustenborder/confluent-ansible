@@ -11,14 +11,14 @@
   file:
     path: "{{schema.registry.environment.LOG_DIR}}"
     state: directory
-    mode: 0755
+    mode: 0640
     owner: "{{schema.registry.user}}"
     group: "{{schema.registry.group}}"
 - name: schema-registry create systemd unit
   template:
     src: schema-registry.service.j2
     dest: "{{schema.registry.systemd_file}}"
-    mode: 0600
+    mode: 0640
     owner: root
     group: root
   notify:
