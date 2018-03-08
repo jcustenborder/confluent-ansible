@@ -21,3 +21,4 @@ kafka:
         offset.flush.interval.ms: 10000
         key.converter: io.confluent.connect.avro.AvroConverter
         value.converter: io.confluent.connect.avro.AvroConverter
+        rest.port: 8094
