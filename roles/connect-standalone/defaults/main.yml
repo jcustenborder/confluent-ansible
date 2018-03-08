@@ -11,6 +11,12 @@ kafka:
       environment:
         KAFKA_HEAP_OPTS: "-Xmx1000M"
         LOG_DIR: /var/log/connect-standalone
+      systemd:
+        enabled: yes
+        state: started
+        LimitNOFILE: 128000
+        TimeoutStopSec: 300
+        RestartSec: 5
       config:
         consumer.interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
         producer.interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
