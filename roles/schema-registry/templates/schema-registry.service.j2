@@ -1,0 +1,22 @@
+[Unit]
+Description=Schema Registry by Confluent
+Wants=basic.target
+After=basic.target network-online.target
+Documentation=https://docs.confluent.io/current/
+
+[Service]
+Type=simple
+User={{ schema.registry.user }}
+ExecStart=/usr/bin/schema-registry-start {{ schema.registry.config_file }}
+KillMode       = process
+RestartSec     = {{ schema.registry.systemd.RestartSec}}
+TimeoutStopSec = {{ schema.registry.systemd.TimeoutStopSec}}
+Type           = simple
+LimitNOFILE    = {{ schema.registry.systemd.LimitNOFILE}}
+
+{% for key, value in schema.registry.environment.items() %}
+Environment="{{key}}={{value}}"
+{% endfor %}
+
+[Install]
+WantedBy=multi-user.target

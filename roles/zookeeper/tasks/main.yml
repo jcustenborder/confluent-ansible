@@ -1,0 +1,56 @@
+- name: zookeeper create group
+  group:
+    name: "{{zookeeper.group}}"
+- name: zookeeper create user
+  user:
+    name: "{{zookeeper.user}}"
+    comment: "Zookeeper User"
+    system: yes
+    group: "{{zookeeper.group}}"
+- name: zookeeper create log dir
+  file:
+    path: "{{zookeeper.environment.LOG_DIR}}"
+    state: directory
+    mode: 0750
+    owner: "{{zookeeper.user}}"
+    group: "{{zookeeper.group}}"
+- name: zookeeper create data dir
+  file:
+    path: "{{zookeeper.config.dataDir}}"
+    state: directory
+    mode: 0750
+    owner: "{{zookeeper.user}}"
+    group: "{{zookeeper.group}}"
+- name: zookeeper myid file
+  template:
+    src: myid.j2
+    dest: "{{zookeeper.config.dataDir}}/myid"
+    mode: 0555
+    owner: "{{zookeeper.user}}"
+    group: "{{zookeeper.group}}"
+  notify:
+    - restart zookeeper
+- name: zookeeper create systemd unit
+  template:
+    src: zookeeper.service.j2
+    dest: "{{zookeeper.systemd_file}}"
+    mode: 0600
+    owner: root
+    group: root
+  notify:
+    - reload systemd
+    - restart zookeeper
+- name: zookeeper create config
+  template:
+    src: zookeeper.properties.j2
+    dest: "{{zookeeper.config_file}}"
+    mode: 0400
+    owner: "{{zookeeper.user}}"
+    group: "{{zookeeper.group}}"
+  notify:
+    - restart zookeeper
+- name: zookeeper configure service
+  systemd:
+    name: "{{zookeeper.service_name}}"
+    enabled: "{{zookeeper.systemd.enabled}}"
+    state: "{{zookeeper.systemd.state}}"
