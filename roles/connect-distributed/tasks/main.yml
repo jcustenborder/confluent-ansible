@@ -15,6 +15,14 @@
   notify:
     - reload systemd
     - restart connect distributed
+- name: connect distributed plugin path
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0750
+    owner: "{{kafka.connect.user}}"
+    group: "{{kafka.connect.group}}"
+  with_items: "{{kafka.connect.distributed.plugin_path}}"
 - name: connect distributed create config
   template:
     src: connect-distributed.properties.j2
