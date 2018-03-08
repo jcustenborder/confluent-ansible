@@ -11,7 +11,7 @@
   file:
     path: "{{kafka.rest.environment.LOG_DIR}}"
     state: directory
-    mode: 0755
+    mode: 0750
     owner: "{{kafka.rest.user}}"
     group: "{{kafka.rest.group}}"
 - name: kafka-rest create systemd unit

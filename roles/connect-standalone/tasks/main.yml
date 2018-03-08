@@ -4,14 +4,14 @@
   file:
     path: "{{kafka.connect.standalone.data_dir}}"
     state: directory
-    mode: 0755
+    mode: 0750
     owner: "{{kafka.connect.user}}"
     group: "{{kafka.connect.group}}"
 - name: connect standalone create data dir
   file:
     path: "{{kafka.connect.standalone.environment.LOG_DIR}}"
     state: directory
-    mode: 0755
+    mode: 0750
     owner: "{{kafka.connect.user}}"
     group: "{{kafka.connect.group}}"
 - name: connect standalone create systemd unit

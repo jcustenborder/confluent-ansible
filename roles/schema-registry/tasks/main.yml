@@ -11,7 +11,7 @@
   file:
     path: "{{schema.registry.environment.LOG_DIR}}"
     state: directory
-    mode: 0640
+    mode: 0750
     owner: "{{schema.registry.user}}"
     group: "{{schema.registry.group}}"
 - name: schema-registry create systemd unit
