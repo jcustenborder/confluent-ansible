@@ -11,14 +11,14 @@
   file:
     path: "{{confluent.control.center.environment.LOG_DIR}}"
     state: directory
-    mode: 0555
+    mode: 0640
     owner: "{{confluent.control.center.user}}"
     group: "{{confluent.control.center.group}}"
 - name: control center create data dir
   file:
     path: "{{confluent.control.center.data_dir}}"
     state: directory
-    mode: 0550
+    mode: 0640
     owner: "{{confluent.control.center.user}}"
     group: "{{confluent.control.center.group}}"
 - name: control center create temp dir
